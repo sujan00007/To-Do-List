@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import TodoPage from './pages/TodoPage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -21,12 +22,14 @@ export default function App() {
   const toggleDarkMode = () => setDarkMode(!darkMode);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-gray-950 dark:via-gray-900 dark:to-indigo-950 transition-colors duration-500">
-      <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      <main className="flex-1">
-        <TodoPage />
-      </main>
-      <Footer />
-    </div>
+    <ProtectedRoute>
+      <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-gray-950 dark:via-gray-900 dark:to-indigo-950 transition-colors duration-500">
+        <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        <main className="flex-1">
+          <TodoPage />
+        </main>
+        <Footer />
+      </div>
+    </ProtectedRoute>
   );
 }
